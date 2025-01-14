@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = barangAdapter
+            setHasFixedSize(true) // Optimasi dengan mengaktifkan setHasFixedSize
         }
     }
 
