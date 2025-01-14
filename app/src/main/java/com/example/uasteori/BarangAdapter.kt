@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.uasteori.databinding.ItemBarangBinding
 import com.example.uasteori.model.Barang
 import com.squareup.picasso.Picasso
+import java.io.File
 
 class BarangAdapter(
     private val onEdit: (Barang) -> Unit,
@@ -43,8 +44,10 @@ class BarangAdapter(
             binding.tvStok.text = "Stok: ${barang.stok}"
 
             // Set gambar barang dengan Picasso
-            val imageUrl = "file:///android_asset/${barang.gambar_barang}"
-            Picasso.get().load(imageUrl).into(binding.ivBarang)
+            val imageFile = File(binding.root.context.filesDir, barang.gambar_barang)
+            if (imageFile.exists()) {
+                Picasso.get().load(imageFile).into(binding.ivBarang)
+            }
 
             // Set aksi untuk tombol edit dan delete
             binding.btnEdit.setOnClickListener { onEdit(barang) }
